@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Cinebel.Models
 {
-    internal class Personne
+    public class Personne
     {
+
     }
 }

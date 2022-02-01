@@ -10,52 +10,101 @@ namespace AdoToolbox
 {
     public class Connection
     {
-        SqlConnection _connection;
-        public SqlConnection connection
+        private string _connectionString;
+
+        public Connection(string connectionString)
         {
-           private get { return _connection; }
-            set { _connection = value; }
+            if(string.IsNullOrWhiteSpace(connectionString)) throw new ArgumentNullException(nameof(connectionString));
+            _connectionString = connectionString;
         }
 
-
-        public Connection(string connexionString)
+        private SqlConnection CreateConnection()
         {
-            connection = new SqlConnection(connexionString);
+            SqlConnection connection = new SqlConnection(_connectionString);
+            return connection;
         }
 
-        
-        public bool ExecuteNonQuery(Command cmd)
+        private SqlCommand CreateCommand(Command command, SqlConnection c)
         {
-            connection
-                using (SqlCommand cmd = connexion.CreateCommand())
+            SqlCommand cmd = c.CreateCommand();
+
+            cmd.CommandText = command.Query;
+            cmd.CommandType = (command.IsStoredProcedure) ? CommandType.StoredProcedure : CommandType.Text;
+
+            foreach (KeyValuePair<string, object> item in command.Parameters)
+            {
+                SqlParameter parameter = new SqlParameter
                 {
-                    cmd.CommandText = $"UPDATE Produit SET QteStock = @QteStock Where IdProduit = '{nrProduit}';";
-                    connexion.Open();
-                    cmd.Parameters.AddWithValue("QteStock", QuantiteStock);
-                    int Qte = (int)cmd.ExecuteNonQuery();
-                    connexion.Close();
+                    ParameterName = item.Key,
+                    Value = (item.Value is null) ? DBNull.Value : item.Value
+                };
 
+                cmd.Parameters.Add(parameter);
+            }
+
+            return cmd;
+        }
+
+        public int ExecuteNonQuery(Command cmd)
+        {
+            using(SqlConnection c = CreateConnection())
+            {
+                using(SqlCommand command = CreateCommand(cmd, c))
+                {
+                    c.Open();
+                    int result = command.ExecuteNonQuery();
+                    c.Close();
+                    return result;
                 }
-
+            }
         }
 
         public object ExecuteScalar(Command cmd)
         {
-            
+            using(SqlConnection c = CreateConnection())
+            {
+                using (SqlCommand command = CreateCommand(cmd, c))
+                {
+                    c.Open();
+                    object result = command.ExecuteScalar();
+                    c.Close();
+                    return (result is DBNull) ? null : result;
+                }
+            }
         }
 
-        public IEnumerable<T> ExecuteReader<T>(Command cmd)
+        public IEnumerable<T> ExecuteReader<T>(Command cmd, Func<SqlDataReader, T> Convert)
         {
-
-            //yield return ;
-            //Vous aurez besoin d'un delegate type Func
-            throw new NotImplementedException();
+            using(SqlConnection c = CreateConnection())
+            {
+                using(SqlCommand command = CreateCommand(cmd,c))
+                {
+                    c.Open();
+                    using(SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return Convert(reader);
+                        }
+                    }
+                }
+            }
         }
 
         public DataTable GetDataTable(Command cmd)
         {
-            //return new DataTable();
+            using(SqlConnection c = CreateConnection())
+            {
+                using(SqlCommand command = CreateCommand(cmd, c))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = command;
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
+                    return dt;
+                }
+            }
         }
     }
 }

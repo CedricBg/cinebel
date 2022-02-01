@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Cinebel.Models;
 using Cinebel.Tools;
+using System.Collections.ObjectModel;
 
 namespace Cinebel.ViewModels
 {
-    internal class LoginCinebel : ViewModelBase
+    public class LoginCinebel : ViewModelBase
     {
+
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cinebel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Page d'accueil" Height="700" Width="1200" DataContext="{StaticResource Main}">
     <Grid>
        
 

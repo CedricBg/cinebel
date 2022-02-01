@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Cinebel"
+             xmlns:vm="clr-namespace:Cinebel.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <vm:LoginCinebel x:Key="Main" />
     </Application.Resources>
 </Application>

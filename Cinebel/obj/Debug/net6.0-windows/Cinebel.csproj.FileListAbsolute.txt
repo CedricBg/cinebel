@@ -3,3 +3,4 @@ H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\MainWindow.g.cs
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\App.g.cs
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel_MarkupCompile.cache
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel_MarkupCompile.lref
+H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
