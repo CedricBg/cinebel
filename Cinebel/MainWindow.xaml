@@ -7,15 +7,6 @@
         mc:Ignorable="d"
         Title="Page d'accueil" Height="700" Width="1200" DataContext="{StaticResource Main}">
     <Grid>
-        <DataGrid>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate />
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
 
     </Grid>
 </Window>
