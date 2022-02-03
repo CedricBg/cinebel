@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="Page d'accueil" Height="700" Width="1200" DataContext="{StaticResource Main}">
     <Grid>
+        <Button Content="Connexion" HorizontalAlignment="Left" Margin="286,292,0,0" VerticalAlignment="Top" Height="72" Width="110" Command="{Binding Login}" Cursor="Hand"  />
+        <Button Content="Register" HorizontalAlignment="Left" Margin="413,292,0,0" VerticalAlignment="Top" Height="72" Width="110" Command="{Binding Register}"  Cursor="Hand"  />
+
+        <TextBox HorizontalAlignment="Left" Margin="151,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Text="{Binding NickName}" Height="45" />
+        <TextBox HorizontalAlignment="Left" Margin="368,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Password}" Width="155" Height="45" />
+        <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="151,119,0,0" VerticalAlignment="Top" Height="38" Width="162"/>
+        <Label Content="Mot de Passe" HorizontalAlignment="Left" Margin="376,119,0,0" VerticalAlignment="Top" Width="140" Height="38"/>
+        <Button x:Name="SelectRegister" Content="Connexion" HorizontalAlignment="Left" Margin="1084,0,0,0" VerticalAlignment="Top" Height="41" Width="116" Command="{Binding ChangeButton}" Cursor="Hand" />
+
+
+
 
     </Grid>
 </Window>
