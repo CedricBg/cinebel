@@ -9,18 +9,11 @@ using System.Collections.ObjectModel;
 using Cinebel.AdoToolbox;
 using System.Data.SqlClient;
 using System.Data;
-using System.Windows.Controls;
-
 namespace Cinebel.ViewModels 
 {
     public class ChoiceCinebel : ViewModelBase
 
     {
-       
-
-        public ChoiceCinebel()
-        {
-        }
 
         private string _Id;
         public string Id
@@ -136,7 +129,8 @@ namespace Cinebel.ViewModels
                 }
             }
         }
-        
+
+
 
         private RelayCommand _AjouterFilm;
 
@@ -148,6 +142,7 @@ namespace Cinebel.ViewModels
         private string CheckFilm()
         {
                 string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
                 Connection cnx = new Connection(cs);
                 string sql = "CheckFilmExist";
                 Command cmd = new Command(sql, true);

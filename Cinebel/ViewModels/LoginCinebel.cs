@@ -54,7 +54,11 @@ namespace Cinebel.ViewModels
         private string CheckUser()
         {
             string UserChecked = null;
+<<<<<<< HEAD
             string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+=======
+            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=090063554744;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+>>>>>>> 93182a0e166c77b1c581978570e580bd2fd010f0
             Connection cnx = new Connection(cs);
             string sql = "CheckUser";
             Command cmd = new Command(sql, true);
@@ -68,7 +72,11 @@ namespace Cinebel.ViewModels
             string UserChecked = CheckUser();
             if (UserChecked == null)
             {
+<<<<<<< HEAD
                 string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+=======
+                string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=090063554744;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+>>>>>>> 93182a0e166c77b1c581978570e580bd2fd010f0
                 Connection cnx = new Connection(cs);
                 string sql = "UserRegister";
                 Command cmd = new Command(sql, true);
@@ -78,6 +86,7 @@ namespace Cinebel.ViewModels
             }
         }
 
+<<<<<<< HEAD
         public ObservableCollection<Genre> TousGenre = new ObservableCollection<Genre>();
 
         public void AllGenre()
@@ -96,6 +105,8 @@ namespace Cinebel.ViewModels
         }
 
 
+=======
+>>>>>>> 93182a0e166c77b1c581978570e580bd2fd010f0
         private RelayCommand _Login;
         public RelayCommand Login
         {
@@ -105,7 +116,11 @@ namespace Cinebel.ViewModels
         public void LoginUser()
         {
             string NickNameDb = null;
+<<<<<<< HEAD
             string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+=======
+            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=090063554744;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+>>>>>>> 93182a0e166c77b1c581978570e580bd2fd010f0
             Connection cnx = new Connection(cs);
             string sql = "UserLogin";
 
@@ -116,7 +131,10 @@ namespace Cinebel.ViewModels
 
             if(NickNameDb == NickName)
             {
+<<<<<<< HEAD
                
+=======
+>>>>>>> 93182a0e166c77b1c581978570e580bd2fd010f0
                 connecte = true;
                 Window1 window1 = new Window1();
                 window1.Show();
@@ -125,6 +143,10 @@ namespace Cinebel.ViewModels
             
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 93182a0e166c77b1c581978570e580bd2fd010f0
         
 
 

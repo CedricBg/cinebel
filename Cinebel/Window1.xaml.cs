@@ -1,3 +1,4 @@
+
 ﻿using Cinebel.AdoToolbox;
 using Cinebel.Models;
 using System;
@@ -22,6 +23,7 @@ namespace Cinebel
     /// <summary>
     /// Logique d'interaction pour Window1.xaml
     /// </summary>
+
     
     //Fichier xaml.cs de la fenêtre courante 
     public partial class Window1 : Window
@@ -43,6 +45,5 @@ namespace Cinebel
             //dgusers est le nom dans le xaml
         }
         
-
     }
 }
