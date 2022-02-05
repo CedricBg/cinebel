@@ -27,9 +27,7 @@
         <Button Content="Ajouter un Film " HorizontalAlignment="Left" Margin="337,416,0,0" VerticalAlignment="Top" Height="46" Width="91" Command="{Binding Ajouterfilm}"/>
         <Calendar HorizontalAlignment="Left" Margin="78,79,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
-
         <ListView  Margin="78,281,493,285" Name="dgUsers" Grid.Column="1">
-
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" ></GridViewColumn>
