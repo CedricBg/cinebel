@@ -5,7 +5,12 @@
       "ProjectGuid": "0d37663d-68d9-4a8e-82c6-b40f48947dab",
       "DisplayName": "Cinebel",
       "ColorIndex": 0
+    },
+    "59952bd5-15fb-4e36-a6b7-4b1eaf1763ce": {
+      "ProjectGuid": "59952bd5-15fb-4e36-a6b7-4b1eaf1763ce",
+      "DisplayName": "AdoToolbox",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

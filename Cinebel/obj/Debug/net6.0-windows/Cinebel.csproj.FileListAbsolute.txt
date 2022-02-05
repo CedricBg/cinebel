@@ -1,4 +1,3 @@
-H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.csproj.AssemblyReference.cache
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\MainWindow.g.cs
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\App.g.cs
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel_MarkupCompile.cache
@@ -28,3 +27,6 @@ H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.dll
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\ref\Cinebel.dll
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.pdb
 H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.genruntimeconfig.cache
+H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Window1.g.cs
+H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Window1.baml
+H:\jonathan\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.csproj.AssemblyReference.cache
