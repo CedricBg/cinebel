@@ -25,6 +25,5 @@ namespace Cinebel
             InitializeComponent();
         }
 
-       
     }
 }

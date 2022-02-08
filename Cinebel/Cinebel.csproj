@@ -7,12 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Cine.jpg" />
+    <None Remove="Images\video.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="AdoTools\" />
     <Folder Include="MvvMTools\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Cine.jpg" />
+    <Resource Include="Images\video.ico" />
   </ItemGroup>
 
 </Project>

@@ -9,11 +9,13 @@ using System.Collections.ObjectModel;
 using Cinebel.AdoToolbox;
 using System.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
+using System.Windows;
 
 namespace Cinebel.ViewModels
 {
     
-    public class LoginCinebel : ViewModelBase
+    public class LoginCinebel : ViewModelBase 
     {
         static bool connecte = false;
 
@@ -34,7 +36,7 @@ namespace Cinebel.ViewModels
         private string _Password;
         public string Password
         {
-            get { return _NickName; }
+            get { return _Password; }
             set
             {
                 if (value != _Password)
@@ -44,6 +46,18 @@ namespace Cinebel.ViewModels
                 }
             }
         }
+
+        private string _ErrorMessage;
+
+        public string ErrorMessage {
+            get => _ErrorMessage; 
+            set
+            {
+                _ErrorMessage = value;
+                RaisePropertyChanged(nameof(ErrorMessage));
+            } 
+        }
+
 
         private RelayCommand _Register;
         public RelayCommand Register
@@ -66,7 +80,7 @@ namespace Cinebel.ViewModels
         public void AddUser()
         {
             string UserChecked = CheckUser();
-            if (UserChecked == null)
+            if (!string.IsNullOrEmpty(NickName) && !string.IsNullOrEmpty(Password))
             {
                 string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 Connection cnx = new Connection(cs);
@@ -104,23 +118,31 @@ namespace Cinebel.ViewModels
 
         public void LoginUser()
         {
-            string NickNameDb = null;
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            Connection cnx = new Connection(cs);
-            string sql = "UserLogin";
-
-            Command cmd = new Command(sql, true);
-            cmd.AddParameter("NickName", NickName);
-            cmd.AddParameter("Password", Password);
-            NickNameDb = (string)cnx.ExecuteScalar(cmd);
-
-            if(NickNameDb == NickName)
+            if (!string.IsNullOrEmpty(NickName) && !string.IsNullOrEmpty(Password))
             {
-               
-                connecte = true;
-                Window1 window1 = new Window1();
-                window1.Show();
-                
+                ErrorMessage = null;
+                string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                Connection cnx = new Connection(cs);
+                string sql = "UserLogin";
+
+                Command cmd = new Command(sql, true);
+                cmd.AddParameter("NickName", NickName);
+                cmd.AddParameter("Password", Password);
+
+                if (cnx.ExecuteScalar(cmd) != null)
+                {
+                    connecte = true;
+                    Window1 window1 = new Window1();
+                    NickName = "";
+                    Password = "";
+                    
+                    window1.Show();
+                    Application.Current.Windows[0].Close();
+                }
+                else
+                {
+                    ErrorMessage = "Bad Crédentials";
+                }
             }
             
         }
@@ -133,6 +155,8 @@ namespace Cinebel.ViewModels
         {
             get { return _ChangeButton ?? (_ChangeButton = new RelayCommand(ButtonRegister)); }
         }
+
+
         static bool changer = false;
         
         
@@ -147,6 +171,7 @@ namespace Cinebel.ViewModels
 
 
         }
-        
+      
+
     }
 }

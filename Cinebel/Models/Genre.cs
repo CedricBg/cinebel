@@ -23,9 +23,11 @@ namespace Cinebel.Models
                 NomGenre = (string)reader["Nom_genre"], 
             };
         }
-
-        
-
-        
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set { isSelected = value; }
+        }
     }
 }

@@ -459,11 +459,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\jonathan\\cinebel\\Cinebel\\Cinebel.csproj",
+      "projectUniqueName": "H:\\jonathan\\Cinebel\\cinebel\\Cinebel\\Cinebel.csproj",
       "projectName": "Cinebel",
-      "projectPath": "H:\\jonathan\\cinebel\\Cinebel\\Cinebel.csproj",
+      "projectPath": "H:\\jonathan\\Cinebel\\cinebel\\Cinebel\\Cinebel.csproj",
       "packagesPath": "C:\\Users\\cedri\\.nuget\\packages\\",
-      "outputPath": "H:\\jonathan\\cinebel\\Cinebel\\obj\\",
+      "outputPath": "H:\\jonathan\\Cinebel\\cinebel\\Cinebel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\cedri\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -3,18 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Icon="/Images/video.ico"
         xmlns:local="clr-namespace:Cinebel"
         mc:Ignorable="d"
-        Title="Page d'accueil" Height="700" Width="1200" DataContext="{StaticResource Main}">
+        Title="Cinebel" Height="700" ResizeMode="NoResize" Width="1200" DataContext="{StaticResource Main}">
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/Cine.jpg" Stretch="Fill" />
+    </Window.Background>
+   
     <Grid>
-        <Button Content="Connexion" HorizontalAlignment="Left" Margin="286,292,0,0" VerticalAlignment="Top" Height="72" Width="110" Command="{Binding Login}" Cursor="Hand"  />
-        <Button Content="Register" HorizontalAlignment="Left" Margin="413,292,0,0" VerticalAlignment="Top" Height="72" Width="110" Command="{Binding Register}"  Cursor="Hand"  />
+        <Button Content="Connexion" HorizontalAlignment="Left" Margin="456,198,0,0" VerticalAlignment="Top" Height="36" Width="110" Command="{Binding Login}" Cursor="Hand"  />
+        <Button Content="Register" HorizontalAlignment="Left" Margin="456,255,0,0" VerticalAlignment="Top" Height="36" Width="110" Command="{Binding Register}"  Cursor="Hand"  />
+        
+        <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="426,20,0,0" VerticalAlignment="Top" Height="38" Width="162"/>
+        <TextBox HorizontalAlignment="Left" Margin="426,58,0,0"  VerticalAlignment="Top" Width="162" Text="{Binding NickName}" Height="32" />
+        
+        <Label Content="Mot de Passe" HorizontalAlignment="Left" Margin="426,104,0,0" VerticalAlignment="Top" Width="140" Height="38" Cursor="Hand"/>
+        <TextBox HorizontalAlignment="Left"  Margin="429,147,0,0"  VerticalAlignment="Top" Text="{Binding Password}" Width="162" Height="32" />
+        <Label Content="{Binding ErrorMessage}" Margin="1000,0,0,0"></Label>
+        <Button Content="Connexion" HorizontalAlignment="Left" Margin="1084,0,0,0" VerticalAlignment="Top" Height="41" Width="116" Command="{Binding ChangeButton}" Cursor="Hand" />
 
-        <TextBox HorizontalAlignment="Left" Margin="151,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Text="{Binding NickName}" Height="45" />
-        <TextBox HorizontalAlignment="Left" Margin="368,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Password}" Width="155" Height="45" />
-        <Label Content="Utilisateur" HorizontalAlignment="Left" Margin="151,119,0,0" VerticalAlignment="Top" Height="38" Width="162"/>
-        <Label Content="Mot de Passe" HorizontalAlignment="Left" Margin="376,119,0,0" VerticalAlignment="Top" Width="140" Height="38"/>
-        <Button x:Name="SelectRegister" Content="Connexion" HorizontalAlignment="Left" Margin="1084,0,0,0" VerticalAlignment="Top" Height="41" Width="116" Command="{Binding ChangeButton}" Cursor="Hand" />
 
 
 
