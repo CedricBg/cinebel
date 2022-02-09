@@ -7,16 +7,51 @@
         mc:Ignorable="d"
         Icon="/Images/video.ico"
         Title="Window1" Height="700" Width="1200" ResizeMode="NoResize" DataContext="{StaticResource Choice}">
-    <Window.Background>
-        <ImageBrush ImageSource="/Images/Cine.jpg" Stretch="Fill" />
-    </Window.Background>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="61*"/>
             <ColumnDefinition Width="539*"/>
         </Grid.ColumnDefinitions>
 
-        <TabControl Grid.ColumnSpan="2">
+        <TabControl Grid.ColumnSpan="2" >
+            <TabControl.Background>
+                <ImageBrush ImageSource="/Images/Cine.jpg" Stretch="Fill" Opacity="0.2" />
+            </TabControl.Background>
+            <TabItem Header="Accueil">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="73*"/>
+                        <ColumnDefinition Width="311*"/>
+                        <ColumnDefinition Width="810*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Connecte}" HorizontalAlignment="Left" Margin="14,13,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+                    <ListView SelectionMode="Single" BorderThickness="0"  Margin="362,61,123,23" ItemsSource="{Binding ListeFilmCrea}" SelectedItem="{Binding AfficherFilm, Mode=TwoWay}" Grid.Column="2" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Nr°" Width="30" DisplayMemberBinding="{Binding Id }" ></GridViewColumn>
+                                <GridViewColumn Header="Titre" Width="100" DisplayMemberBinding="{Binding Titre }"></GridViewColumn>
+                                <GridViewColumn Header="Genre" Width="100" DisplayMemberBinding="{Binding StrGenre }"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Image HorizontalAlignment="Left"  Source="{Binding imagess}"  Height="282" Margin="63,61,0,0" VerticalAlignment="Top" Width="351" Grid.ColumnSpan="3" />
+
+
+                    <Label Grid.Column="2" Content="Titre" HorizontalAlignment="Left" Margin="120,84,0,0" VerticalAlignment="Top" Width="122"/>
+                    <Label Grid.Column="2" Content="{Binding AfficherTitre}" HorizontalAlignment="Left" Margin="125,133,0,0" VerticalAlignment="Top" />
+
+                    <Label Grid.Column="2" Content="Genre" HorizontalAlignment="Left" Margin="120,167,0,0" VerticalAlignment="Top"/>
+                    <Label Grid.Column="2" Content="{Binding typeFilm}" HorizontalAlignment="Left" Margin="120,212,0,0" VerticalAlignment="Top"/>
+
+
+                    <Button Grid.Column="1" Command="{Binding PinUpView }" Content="Visualisez un film" HorizontalAlignment="Left" Margin="255,558,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="167" Height="43"/>
+
+
+                </Grid>
+            </TabItem>
             <TabItem Header="Liste des films">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -25,6 +60,7 @@
                         <ColumnDefinition Width="12*"/>
                         <ColumnDefinition Width="1096*"/>
                     </Grid.ColumnDefinitions>
+                    <Label Grid.Column="3" Content="{Binding Connecte}" HorizontalAlignment="Left" Margin="16,24,0,0" VerticalAlignment="Top" />
                     <Label Content="titre" HorizontalAlignment="Left" Margin="3,136,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.ColumnSpan="2"/>
                     <Label Content="Synopsis" HorizontalAlignment="Left" Margin="0,206,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.ColumnSpan="2" />
 
@@ -84,9 +120,11 @@
                         <WrapPanel />
                         <Image  Margin="10"  />
                     </StackPanel>
-                    <Button  Command="{Binding AjouterImage}" Content="Charger une image" Margin="306,140,639,468" Grid.Column="3" />
+                    <Label Grid.Column="3" Content="Inserez ici l'url de votre image :" HorizontalAlignment="Left" Margin="313,149,0,0" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding AjouterImage}" Margin="313,195,632,413" Grid.Column="3" />
                     <Label Grid.Column="3" Content="{Binding ConfirmationFilmAjouter}"  HorizontalAlignment="Left" Margin="120,85,0,0" VerticalAlignment="Top" Width="131" Height="36" />
-                    <Label Grid.Column="3" Content="{Binding Id}" HorizontalAlignment="Left" Margin="649,49,0,0" VerticalAlignment="Top" Width="66"/>
+
+
                 </Grid>
             </TabItem>
 
@@ -94,41 +132,46 @@
             <!-- ////////////////////////////////////////////////////////////Tabitem1 ///////////////////////////////////////// -->
             <!-- ////////////////////////////////////////////////////////////Tabitem1 ///////////////////////////////////////// -->
 
-            <TabItem Header="Ajouter une Peronne dans la liste" HorizontalAlignment="Left" Width="206" Margin="-2,-2,0,0">
+            <TabItem Header="Ajouter une Peronne" HorizontalAlignment="Left" Width="206" Margin="-2,-2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24*"/>
                         <ColumnDefinition Width="11*"/>
                         <ColumnDefinition Width="52*"/>
-                        <ColumnDefinition Width="1107*"/>
+                        <ColumnDefinition Width="304*"/>
+                        <ColumnDefinition Width="803*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Margin="5,25,827,556" Text="{Binding NomCreaPersonne}" Grid.Column="3"/>
-                    <TextBox Margin="5,155,810,438" Text="{Binding PreNomCreaPersonne}" Grid.Column="3"/>
-                    <DatePicker Margin="5,249,810,305" Text="{Binding DateNiassPersonne}" Grid.Column="3" />
 
-                    <Button Command="{Binding AjouterPersonne}" Margin="5,409,914,189" Grid.Column="3">Ajouter</Button>
-                    <Label Grid.Column="3"  Content="{Binding ErrorMessageOk}" HorizontalAlignment="Left" Margin="386,25,0,0" VerticalAlignment="Top"  Height="30"/>
+                    <Label Grid.Column="3" Content="{Binding Connecte}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <TextBox Margin="10,54,19,527" Text="{Binding NomCreaPersonne}" Grid.Column="3"/>
+                    <TextBox Margin="10,172,2,421" Text="{Binding PreNomCreaPersonne}" Grid.Column="3"/>
+                    <DatePicker Margin="5,307,111,301" Text="{Binding DateNiassPersonne}" Grid.Column="3" />
+
+                    <Button Command="{Binding AjouterPersonne}" Margin="5,473,111,125" Grid.Column="3">Ajouter</Button>
+                    <Label Grid.Column="4"  Content="{Binding ErrorMessageOk}" HorizontalAlignment="Left" Margin="82,25,0,0" VerticalAlignment="Top"  Height="30"/>
 
                 </Grid>
             </TabItem>
             <!-- ////////////////////////////////////////////////// Tabitem 3 ///////////////////////////////////////////////////////////////////////////////-->
-            <!-- ////////////////////////////////////////////////// Tabitem 3 ///////////////////////////////////////////////////////////////////////////////-->
+            <!-- ////////////////////////////////////////////////// Ajoter Liste ///////////////////////////////////////////////////////////////////////////////-->
             <TabItem  Header="Creer une liste de film">
                 <Grid>
-                    <TextBox Text="Test" Margin="91,80,998,553"/>
-                    <Label Content="Nom de la liste :" HorizontalAlignment="Left" Margin="84,43,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
+                    <Label Content="{Binding Connecte}" HorizontalAlignment="Left" Margin="64,25,0,0" VerticalAlignment="Top" />
+                    <Label Content="Nom de la liste :" HorizontalAlignment="Left" Margin="94,101,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
+                    <TextBox Text="{Binding NomCreaListe}" Margin="94,145,923,469"/>
+                    <Label  Content="Sélectionnez un film dans la liste" HorizontalAlignment="Left" Margin="89,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.502"/>
 
-                    <Label  Content="Sélectionnez un film dans la liste" HorizontalAlignment="Left" Margin="99,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.502"/>
-
-                    <ListView SelectionMode="Single"  Margin="91,204,807,223" ItemsSource="{Binding TousRealisateur}" SelectedItem="{Binding RealisateurSelecter, Mode=TwoWay}" >
+                    <ListView SelectionMode="Single"  Margin="81,290,817,137" ItemsSource="{Binding ListeFilmCrea}" SelectedItem="{Binding ListeFilmCreaSelecter, Mode=TwoWay}" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Nr°" Width="30" DisplayMemberBinding="{Binding Id_Personne_real }" ></GridViewColumn>
-                                <GridViewColumn Header="Nom" Width="100" DisplayMemberBinding="{Binding Nom_real }"></GridViewColumn>
-                                <GridViewColumn Header="Prenom" Width="100" DisplayMemberBinding="{Binding Prenom_real }"></GridViewColumn>
+                                <GridViewColumn Header="Nr°" Width="30" DisplayMemberBinding="{Binding Id }" ></GridViewColumn>
+                                <GridViewColumn Header="Titre" Width="100" DisplayMemberBinding="{Binding Titre }"></GridViewColumn>
+                                <GridViewColumn Header="Genre" Width="100" DisplayMemberBinding="{Binding StrGenre }"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <Label Content="Creation de liste" HorizontalAlignment="Left" Margin="429,20,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Button" Command="{Binding CreaList}" HorizontalAlignment="Left" Margin="429,528,0,0" VerticalAlignment="Top" Height="37" Width="168"/>
 
                 </Grid>
             </TabItem>

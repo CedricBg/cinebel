@@ -11,13 +11,15 @@ namespace Cinebel.Models
     {
         public string NickName { get; set; }
         public string password { get; set; }
+        public int ID { get; set; } 
 
 
         public static Utilisateur Converter(SqlDataReader reader)
         {
             return new Utilisateur
             {
-                NickName = (string)reader["NickName"]
+                NickName = (string)reader["NickName"],
+                ID = (int)reader["Id_Utilisateur"]
             };
         }
     } 

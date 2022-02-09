@@ -14,21 +14,122 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Data;
+using Cinebel;
 
 namespace Cinebel.ViewModels 
 {
     public class ChoiceCinebel : ViewModelBase
     {
+        
         public ChoiceCinebel()
         {
             _TousGenre = new ObservableCollection<Genre>();
             _TousScenariste = new ObservableCollection<Scenaristes>();
             _TousRealisateur = new ObservableCollection<Realisateur>();
+            _ListeFilmCrea = new ObservableCollection<film>();
             AllGenre();
             AllScenariste();
             AllRealisateur();
+            SelectAllFilms();
+        }
+
+        /// <summary>
+        /// //////////////////////////////////////Tab item Accueil/////////////////////////////
+        /// </summary>
+        /// 
+        
+
+        private string _typeFilm;
+
+        public string typeFilm
+        {
+            get { return _typeFilm; }
+            set
+            {
+                if (value != _typeFilm)
+                {
+                    _typeFilm = value;
+                    RaisePropertyChanged(nameof(typeFilm));
+                }
+            }
+        }
+
+        private string _AfficherTitre;
+
+        public string AfficherTitre
+        {
+            get { return _AfficherTitre; }
+            set
+            {
+                if (value != _AfficherTitre)
+                {
+                    _AfficherTitre = value;
+                    RaisePropertyChanged(nameof(AfficherTitre));
+                }
+            }
+        }
+        private string _imagess= "/Images/Cine.jpg";
+
+        public string imagess
+        {
+            get { return _imagess; }
+            set
+            {
+                if (value != _imagess)
+                {
+                    _imagess = value;
+                    RaisePropertyChanged(nameof(imagess));
+                }
+            }
+        }
+
+
+        private film _AfficherFilm;
+        public film AfficherFilm
+        {
+            get { return _AfficherFilm; }
+            set
+            {
+                if (value != _AfficherFilm)
+                {
+                    _AfficherFilm = value;
+                    RaisePropertyChanged(nameof(AfficherFilm));
+                }
+            }
+        }
+
+        private RelayCommand _PinUpView;
+
+        public RelayCommand PinUpView
+        {
+            get { return _PinUpView ?? (_PinUpView = new RelayCommand(ViewFilm)); }
+        }
+
+
+        public void ViewFilm()
+        {
             
         }
+
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        private string _Connecte = $"Connecté en tant que {User.Nickname}";
+        public string Connecte
+        {
+            get { return _Connecte; }
+            set
+            {
+                if (value != _Connecte)
+                {
+                    _Connecte = value;
+                    RaisePropertyChanged(nameof(Connecte));
+                }
+            }
+        }
+        
 
         private string _Synopsis;
         public string Synopsis
@@ -171,7 +272,7 @@ namespace Cinebel.ViewModels
             }
         }
 
-
+        
 
         private ObservableCollection<Realisateur> _TousRealisateur;
 
@@ -213,8 +314,22 @@ namespace Cinebel.ViewModels
 
         private string _Affiche;
 
-        public string Affiche { get { return _Affiche; }
-            set { _Affiche = value; RaisePropertyChanged(nameof(ErrorMessageOk));
+        public string Affiche { 
+            get { return _Affiche; }
+            set 
+            { 
+                _Affiche = value; RaisePropertyChanged(nameof(ErrorMessageOk));
+            }
+        }
+
+        private string _AjouterImage = "Https://";
+
+        public string AjouterImage
+        {
+            get { return _AjouterImage; }
+            set
+            {
+                _AjouterImage = value; RaisePropertyChanged(nameof(AjouterImage));
             }
         }
 
@@ -229,26 +344,6 @@ namespace Cinebel.ViewModels
             }
         }
         
-
-        private RelayCommand _AjouterImage;
-
-        public RelayCommand AjouterImage
-        {
-            get { return _AjouterImage ?? (_AjouterImage = new RelayCommand(ChargerImage)); }
-        }
-        public void ChargerImage()
-        {
-            String savePath = @"./images/";
-            SaveFileDialog openFileDialog = new SaveFileDialog();
-            openFileDialog.Title = "Select a picture";
-            openFileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-            if (openFileDialog.ShowDialog() == true)
-            {
-
-
-            }
-        }
-
         private RelayCommand _AjouterFilm;
 
         public RelayCommand Ajouterfilm
@@ -266,7 +361,7 @@ namespace Cinebel.ViewModels
             string filmChecked = (string)cnx.ExecuteScalar(cmd);
             return filmChecked;
         }
-
+        
         public ObservableCollection<film> films { get; set; }
         public void AddFilm()
         {
@@ -299,11 +394,8 @@ namespace Cinebel.ViewModels
             Acteurs acteurs = new Acteurs();
             acteurs.ShowDialog();
 
+
         }
-
-
-
-
 
 
         /////////////////////////////////////////
@@ -372,6 +464,94 @@ namespace Cinebel.ViewModels
                 
             }
         }
+
+        ////////////////////////////////////////////Tabitem3//////////////////////////////////
+        ////////////////////////////////////////////Tabitem3//////////////////////////////////
+        ///
+
+        private string _NomCreaListe;
+        public string NomCreaListe
+        {
+            get { return _NomCreaListe; }
+            set
+            {
+                _NomCreaListe = value; RaisePropertyChanged(nameof(ListeFilmCreaSelecter));
+            }
+        }
+
+        private film _ListeFilmCreaSelecter;
+        public film ListeFilmCreaSelecter
+        {
+            get { return _ListeFilmCreaSelecter; }
+            set
+            {
+                _ListeFilmCreaSelecter = value; RaisePropertyChanged(nameof(ListeFilmCreaSelecter));
+            }
+        }
+
+        private string _MessageCreaListe;
+        public string MessageCreaListe
+        {
+            get { return _MessageCreaListe; }
+            set
+            {
+                _MessageCreaListe = value; RaisePropertyChanged(nameof(MessageCreaListe));
+            }
+        }
+
+        private string _IdCreaFilms;
+        public string IdCreaFilms
+        {
+            get { return _IdCreaFilms; }
+            set
+            {
+                _IdCreaFilms = value; RaisePropertyChanged(nameof(IdCreaFilms));
+            }
+        }
+        private ObservableCollection<film> _ListeFilmCrea;
+        public ObservableCollection<film> ListeFilmCrea
+        {
+            get { return _ListeFilmCrea; }
+            set { _ListeFilmCrea = value; RaisePropertyChanged(nameof(_ListeFilmCrea)); }
+
+        }
+
+        private RelayCommand _CreaList;
+
+        public RelayCommand CreaList
+        {
+            get { return _CreaList ?? (_CreaList = new RelayCommand(SelectAllFilms)); }
+        }
+        public void SelectAllFilms()
+        {
+            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            Connection cnx = new Connection(cs);
+            string sql = "Allfilms";
+            Command cmd = new Command(sql, true);
+            foreach (film item in cnx.ExecuteReader(cmd, film.ConvertAll))
+            {
+                foreach(Genre elt in TousGenre)
+                {
+                    if(item.Genre == elt.Id)
+                    {
+                        item.StrGenre = elt.NomGenre;
+                    }
+                }
+                ListeFilmCrea.Add(item);
+            }
+        }
+        public void CreationListe()
+        {
+            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            Connection cnx = new Connection(cs);
+            string sql = "NewListe";
+            Command cmd = new Command(sql, true);
+            cmd.AddParameter("Id_Utilisateur", User.Nickname);
+            cmd.AddParameter("Id_Film", IdCreaFilms);
+            cmd.AddParameter("NomListe", NomCreaListe);
+            cnx.ExecuteScalar(cmd);
+        }
+
 
 
     }

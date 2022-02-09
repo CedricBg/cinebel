@@ -17,7 +17,6 @@ namespace Cinebel.ViewModels
     
     public class LoginCinebel : ViewModelBase 
     {
-        static bool connecte = false;
 
         private string _NickName;
         public string NickName
@@ -115,7 +114,7 @@ namespace Cinebel.ViewModels
         {
             get { return _Login ?? (_Login = new RelayCommand(LoginUser)); }
         }
-
+        public ObservableCollection<Utilisateur> Users = new ObservableCollection<Utilisateur>();
         public void LoginUser()
         {
             if (!string.IsNullOrEmpty(NickName) && !string.IsNullOrEmpty(Password))
@@ -124,14 +123,20 @@ namespace Cinebel.ViewModels
                 string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 Connection cnx = new Connection(cs);
                 string sql = "UserLogin";
-
                 Command cmd = new Command(sql, true);
                 cmd.AddParameter("NickName", NickName);
                 cmd.AddParameter("Password", Password);
-
-                if (cnx.ExecuteScalar(cmd) != null)
+                
+                foreach(Utilisateur item in cnx.ExecuteReader(cmd, Utilisateur.Converter))
                 {
-                    connecte = true;
+                    Users.Add(item);
+                }
+                
+                if (Users.Count > 0)
+
+                {
+                    User.Nickname = NickName;
+                    User.Id = Users[0].ID;
                     Window1 window1 = new Window1();
                     NickName = "";
                     Password = "";

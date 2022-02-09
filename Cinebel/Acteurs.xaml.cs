@@ -19,9 +19,11 @@ namespace Cinebel
     /// </summary>
     public partial class Acteurs : Window
     {
+        
         public Acteurs()
         {
             InitializeComponent();
+            
         }
     }
 }
