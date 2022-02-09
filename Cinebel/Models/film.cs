@@ -17,21 +17,15 @@ namespace Cinebel.Models
         public int Realisateur { get; set; }
         public int Scenariste { get; set; }
         public string Affiche { get; set; }
-        public DateTime AnneeDeSortie { get; set; }
+        public string AnneeDeSortie { get; set; }
 
 
         public static film Converter(SqlDataReader reader)
         {
             return new film
             {
-                Id = (int)reader["Id"],
-                Genre = (int)reader["Genre"],
-                Synopsis = (string)reader["Synopsis"],
-                Titre = (string)reader["Titre"],
-                Realisateur = (int)reader["Realisateur"],
-                Scenariste = (int)reader["Scenariste"],
-                Affiche = (string)reader["Affiche"],
-                AnneeDeSortie = (DateTime)reader["AnneeDeSortie"]
+                Id = (int)reader["Id_Film"],
+               
             };
         }
     }

@@ -18,22 +18,17 @@ using System.Windows.Data;
 namespace Cinebel.ViewModels 
 {
     public class ChoiceCinebel : ViewModelBase
-
     {
-       
         public ChoiceCinebel()
         {
             _TousGenre = new ObservableCollection<Genre>();
-            _TousActeurs = new ObservableCollection<Personne>();
             _TousScenariste = new ObservableCollection<Scenaristes>();
             _TousRealisateur = new ObservableCollection<Realisateur>();
             AllGenre();
-            AllActors();
             AllScenariste();
             AllRealisateur();
+            
         }
-
-       
 
         private string _Synopsis;
         public string Synopsis
@@ -61,7 +56,6 @@ namespace Cinebel.ViewModels
                 }
             }
         }
-
 
         private DateTime _AnneeDeSortie = DateTime.Now;
         public DateTime AnneeDeSortie
@@ -107,7 +101,6 @@ namespace Cinebel.ViewModels
             }
         }
 
-
         private Genre _Genres;
         public Genre Genres
         {
@@ -121,8 +114,6 @@ namespace Cinebel.ViewModels
                 }
             }
         }
-
-
 
         private Scenaristes _ScenaristeSelecter;
         public Scenaristes ScenaristeSelecter
@@ -152,20 +143,6 @@ namespace Cinebel.ViewModels
             }
         }
 
-        private Personne _ActeurSelecter;
-        public Personne ActeurSelecter
-        {
-            get { return _ActeurSelecter; }
-            set
-            {
-                if (value != _ActeurSelecter)
-                {
-                    _ActeurSelecter = value;
-                    RaisePropertyChanged(nameof(ActeurSelecter));
-                }
-            }
-        }
-       
 
 
         private ObservableCollection<Genre> _TousGenre;
@@ -182,9 +159,6 @@ namespace Cinebel.ViewModels
             }
         }
 
-
-
-
         public void AllGenre()
         {
             string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -197,24 +171,7 @@ namespace Cinebel.ViewModels
             }
         }
 
-        private ObservableCollection<Personne> _TousActeurs;
-        public ObservableCollection<Personne> TousActeurs
-        {
-            get { return _TousActeurs; }
-            set { _TousActeurs = value; }
-        }
-        public void AllActors()
-        {
-             string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            Connection cnx = new Connection(cs);
-            string sql = "AllActors";  //procedure stockée
-            Command cmd = new Command(sql, true);
-            foreach (Personne item in cnx.ExecuteReader(cmd, Personne.Converter))
-            {
-                TousActeurs.Add(item);
-            }
 
-        }
 
         private ObservableCollection<Realisateur> _TousRealisateur;
 
@@ -234,7 +191,6 @@ namespace Cinebel.ViewModels
                 TousRealisateur.Add(item);
             }
         }
-
 
         private ObservableCollection<Scenaristes> _TousScenariste;
 
@@ -262,8 +218,17 @@ namespace Cinebel.ViewModels
             }
         }
 
+        private int _Id;
 
-
+        public int Id
+        {
+            get { return _Id; }
+            set
+            {
+                _Id = value; RaisePropertyChanged(nameof(Id));
+            }
+        }
+        
 
         private RelayCommand _AjouterImage;
 
@@ -279,7 +244,7 @@ namespace Cinebel.ViewModels
             openFileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
             if (openFileDialog.ShowDialog() == true)
             {
-  
+
 
             }
         }
@@ -302,51 +267,48 @@ namespace Cinebel.ViewModels
             return filmChecked;
         }
 
-        
-
-
+        public ObservableCollection<film> films { get; set; }
         public void AddFilm()
         {
+
             string filmChecked = CheckFilm();
- 
-                string newDate = AnneeDeSortie.ToString("dd/MM/yyyy");
-            ConfirmationFilmAjouter = "Film bien enregistré";
+
+            string newDate = AnneeDeSortie.ToString("dd/MM/yyyy");
 
             string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "AjoutFilm";
             Command cmd = new Command(sql, true);
-            cmd.AddParameter("titre", Titre);
-            cmd.AddParameter("AnneeSortie", newDate);
-            cmd.AddParameter("Affiche", "tous");
-            if (Genres != null)
+            if (Titre != null)
+                cmd.AddParameter("titre", Titre);
+                cmd.AddParameter("AnneeSortie", newDate);
+                cmd.AddParameter("Affiche", "tous");
                 cmd.AddParameter("Id_Genre", Genres.Id);
-            else
-                cmd.AddParameter("Id_Genre", 1);
-            
-            if (RealisateurSelecter != null)
                 cmd.AddParameter("Id_Realisateur", RealisateurSelecter.Id_Personne_real);
-            else
-                cmd.AddParameter("Id_Realisateur", 1);
-
-            if (ScenaristeSelecter != null)
                 cmd.AddParameter("ID_Scenariste", ScenaristeSelecter.Id_Personne_scen);
-            else
-                cmd.AddParameter("ID_Scenariste", 1);
-            if(Synopsis != null)
                 cmd.AddParameter("synopsis", Synopsis);
-            else
-                ConfirmationFilmAjouter = "Pas titre entré";
-            cnx.ExecuteNonQuery(cmd);
+            Id = (int)cnx.ExecuteScalar(cmd);
+            ConfirmationFilmAjouter = "Film bien enregistré";
             Synopsis = "";
             Titre = "";
             AnneeDeSortie = DateTime.Now;
+            _TousGenre = new ObservableCollection<Genre>();
+            _TousScenariste = new ObservableCollection<Scenaristes>();
+            _TousRealisateur = new ObservableCollection<Realisateur>();
+
+            Acteurs acteurs = new Acteurs();
+            acteurs.ShowDialog();
 
         }
 
+
+
+
+
+
         /////////////////////////////////////////
         ////////////////////////////////////////
-        ///Tabaitem 2
+        ///TabItem 2
         ///
 
 
@@ -393,8 +355,6 @@ namespace Cinebel.ViewModels
             if (!string.IsNullOrEmpty(NomCreaPersonne))
                 { 
                 string newDate = DateNiassPersonne.ToString("dd/MM/yyyy");
-                
-
                 string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 Connection cnx = new Connection(cs);
                 string sql = "AjoutPersonne";
@@ -407,9 +367,9 @@ namespace Cinebel.ViewModels
                 NomCreaPersonne = "";
                 PreNomCreaPersonne = "";
                 DateNiassPersonne = DateTime.Now;
-                AllActors();
                 AllScenariste();
                 AllRealisateur();
+                
             }
         }
 

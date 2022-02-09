@@ -135,7 +135,6 @@ namespace Cinebel.ViewModels
                     Window1 window1 = new Window1();
                     NickName = "";
                     Password = "";
-                    
                     window1.Show();
                     Application.Current.Windows[0].Close();
                 }

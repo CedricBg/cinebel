@@ -1,0 +1,27 @@
+﻿<Window x:Class="Cinebel.Acteurs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinebel"
+        mc:Ignorable="d"
+        Title="Ajouter un Acteur" Height="500" Width="350" ResizeMode="NoResize" DataContext="{StaticResource Acteurss}">
+    <Grid>
+        <Label Content="Sélectionnez les acteurs faisant partie du film :" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" Width="268"/>
+        <ListView  SelectionMode="Single" Margin="86,94,86,164" ItemsSource="{Binding TousActeurs}"  SelectedItem="{Binding Id, Mode=TwoWay}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nr°"  DisplayMemberBinding="{Binding Id_Personne}"></GridViewColumn>
+                    <GridViewColumn Header="Prenom"  DisplayMemberBinding="{Binding Nom}" ></GridViewColumn>
+                    <GridViewColumn Header="Nom"  DisplayMemberBinding="{Binding Prenom}" ></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Rôle :" HorizontalAlignment="Left" Margin="89,339,0,0" VerticalAlignment="Top" Width="99"/>
+        <TextBox HorizontalAlignment="Center" Text="{Binding Role}" Margin="0,378,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="178" Height="24"/>
+        <Label Content="{Binding EnregistrementMessage}" HorizontalAlignment="Left" Margin="151,23,0,0" VerticalAlignment="Top" />
+        <Button Content="Button" Command="{Binding Actors}" HorizontalAlignment="Center" Margin="0,421,0,0" VerticalAlignment="Top" Width="154" Height="29"/>
+
+
+    </Grid>
+</Window>

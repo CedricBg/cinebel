@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="AdoTools\" />
-    <Folder Include="MvvMTools\" />
   </ItemGroup>
 
   <ItemGroup>

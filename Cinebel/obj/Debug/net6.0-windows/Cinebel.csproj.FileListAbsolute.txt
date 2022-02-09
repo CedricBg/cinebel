@@ -61,4 +61,6 @@ H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.dll
 H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\ref\Cinebel.dll
 H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.pdb
 H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.genruntimeconfig.cache
+H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\Acteurs.g.cs
+H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\Acteurs.baml
 H:\jonathan\Cinebel\cinebel\Cinebel\obj\Debug\net6.0-windows\Cinebel.csproj.AssemblyReference.cache

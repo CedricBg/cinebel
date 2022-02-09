@@ -7,6 +7,7 @@
     <Application.Resources>
         <vm:LoginCinebel x:Key="Main" />
         <vm:ChoiceCinebel x:Key="Choice" />
+        <vm:ActeurModelView x:Key="Acteurss" />
         
     </Application.Resources>
 </Application>
