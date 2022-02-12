@@ -8,6 +8,8 @@
         <vm:LoginCinebel x:Key="Main" />
         <vm:ChoiceCinebel x:Key="Choice" />
         <vm:ActeurModelView x:Key="Acteurss" />
+        <vm:ListModelView x:Key="Listee" />
+       
         
     </Application.Resources>
 </Application>

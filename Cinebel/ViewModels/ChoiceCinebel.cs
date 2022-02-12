@@ -16,28 +16,33 @@ using System.Windows;
 using System.Windows.Data;
 using Cinebel;
 
-namespace Cinebel.ViewModels 
+namespace Cinebel.ViewModels
 {
     public class ChoiceCinebel : ViewModelBase
     {
-        
+
         public ChoiceCinebel()
         {
             _TousGenre = new ObservableCollection<Genre>();
             _TousScenariste = new ObservableCollection<Scenaristes>();
             _TousRealisateur = new ObservableCollection<Realisateur>();
             _ListeFilmCrea = new ObservableCollection<film>();
+            _ALLActors = new ObservableCollection<Acteur>();
+            _ListeToutes = new  ObservableCollection<ModelListe>();
+
             AllGenre();
             AllScenariste();
             AllRealisateur();
             SelectAllFilms();
+            AllListe();
+
         }
 
         /// <summary>
         /// //////////////////////////////////////Tab item Accueil/////////////////////////////
         /// </summary>
         /// 
-        
+
 
         private string _typeFilm;
 
@@ -68,7 +73,10 @@ namespace Cinebel.ViewModels
                 }
             }
         }
-        private string _imagess= "/Images/Cine.jpg";
+
+
+
+        private string _imagess = "https://media-animation.be/local/cache-vignettes/Le";
 
         public string imagess
         {
@@ -79,6 +87,34 @@ namespace Cinebel.ViewModels
                 {
                     _imagess = value;
                     RaisePropertyChanged(nameof(imagess));
+                }
+            }
+        }
+
+        private int _ControleAffichage = 0;
+        public int ControleAffichage
+        {
+            get { return _ControleAffichage; }
+            set
+            {
+                if (value != _ControleAffichage)
+                {
+                    _ControleAffichage = value;
+                    RaisePropertyChanged(nameof(ControleAffichage));
+                }
+            }
+        }
+
+        private string _AfficherGene;
+        public string AfficherGene
+        {
+            get { return _AfficherGene; }
+            set
+            {
+                if (value != _AfficherGene)
+                {
+                    _AfficherGene = value;
+                    RaisePropertyChanged(nameof(AfficherGene));
                 }
             }
         }
@@ -106,16 +142,46 @@ namespace Cinebel.ViewModels
         }
 
 
+        private ObservableCollection<Acteur> _ALLActors;
+        public ObservableCollection<Acteur> ALLActors
+        {
+            get { return _ALLActors; }
+            set
+            {
+                if (value != _ALLActors)
+                {
+                    _ALLActors = value;
+                    RaisePropertyChanged(nameof(ALLActors));
+                }
+            }
+        }
+        
         public void ViewFilm()
         {
-            
+            ALLActors.Clear();
+            Synopsis = "";
+            AfficherGene = "";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            Connection cnx = new Connection(cs);
+            string sql = "AfficherActeursAccueil";
+            Command cmd = new Command(sql, true);
+            cmd.AddParameter("Id_Film", AfficherFilm.Id);
+            foreach (Acteur item in cnx.ExecuteReader(cmd, Acteur.Converter))
+            {
+                ALLActors.Add(item);
+                imagess = item.Affichess;
+                AfficherTitre = item.Titre;
+                Synopsis = item.Synopsis;
+                AfficherGene = item.Nom_Genre;
+
+
+
+            }
         }
 
 
-
-
-
         ////////////////////////////////////////////////////////////////////////////////////////////////
+        ///
         private string _Connecte = $"Connecté en tant que {User.Nickname}";
         public string Connecte
         {
@@ -129,7 +195,7 @@ namespace Cinebel.ViewModels
                 }
             }
         }
-        
+
 
         private string _Synopsis;
         public string Synopsis
@@ -262,7 +328,7 @@ namespace Cinebel.ViewModels
 
         public void AllGenre()
         {
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "RecupToutLesGenre";
             Command cmd = new Command(sql, true);
@@ -272,7 +338,7 @@ namespace Cinebel.ViewModels
             }
         }
 
-        
+
 
         private ObservableCollection<Realisateur> _TousRealisateur;
 
@@ -283,7 +349,7 @@ namespace Cinebel.ViewModels
         }
         public void AllRealisateur()
         {
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "AllActors";  //procedure stockée
             Command cmd = new Command(sql, true);
@@ -302,7 +368,7 @@ namespace Cinebel.ViewModels
         }
         public void AllScenariste()
         {
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "AllActors";  //procedure stockée
             Command cmd = new Command(sql, true);
@@ -314,10 +380,11 @@ namespace Cinebel.ViewModels
 
         private string _Affiche;
 
-        public string Affiche { 
+        public string Affiche
+        {
             get { return _Affiche; }
-            set 
-            { 
+            set
+            {
                 _Affiche = value; RaisePropertyChanged(nameof(ErrorMessageOk));
             }
         }
@@ -343,7 +410,7 @@ namespace Cinebel.ViewModels
                 _Id = value; RaisePropertyChanged(nameof(Id));
             }
         }
-        
+
         private RelayCommand _AjouterFilm;
 
         public RelayCommand Ajouterfilm
@@ -353,7 +420,7 @@ namespace Cinebel.ViewModels
 
         private string CheckFilm()
         {
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "CheckFilmExist";
             Command cmd = new Command(sql, true);
@@ -361,7 +428,7 @@ namespace Cinebel.ViewModels
             string filmChecked = (string)cnx.ExecuteScalar(cmd);
             return filmChecked;
         }
-        
+
         public ObservableCollection<film> films { get; set; }
         public void AddFilm()
         {
@@ -370,18 +437,21 @@ namespace Cinebel.ViewModels
 
             string newDate = AnneeDeSortie.ToString("dd/MM/yyyy");
 
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "AjoutFilm";
             Command cmd = new Command(sql, true);
-            if (Titre != null)
+            if (Titre != null || Synopsis != null)
                 cmd.AddParameter("titre", Titre);
-                cmd.AddParameter("AnneeSortie", newDate);
-                cmd.AddParameter("Affiche", "tous");
-                cmd.AddParameter("Id_Genre", Genres.Id);
-                cmd.AddParameter("Id_Realisateur", RealisateurSelecter.Id_Personne_real);
-                cmd.AddParameter("ID_Scenariste", ScenaristeSelecter.Id_Personne_scen);
-                cmd.AddParameter("synopsis", Synopsis);
+            cmd.AddParameter("AnneeSortie", newDate);
+            if (AjouterImage != null)
+                cmd.AddParameter("Affiche", AjouterImage);
+            else
+                cmd.AddParameter("Affiche", "/Images/Cine.jpg");
+            cmd.AddParameter("Id_Genre", Genres.Id);
+            cmd.AddParameter("Id_Realisateur", RealisateurSelecter.Id_Personne_real);
+            cmd.AddParameter("ID_Scenariste", ScenaristeSelecter.Id_Personne_scen);
+            cmd.AddParameter("synopsis", Synopsis);
             Id = (int)cnx.ExecuteScalar(cmd);
             ConfirmationFilmAjouter = "Film bien enregistré";
             Synopsis = "";
@@ -410,26 +480,31 @@ namespace Cinebel.ViewModels
         public string ErrorMessageOk
         {
             get { return _ErrorMessageOk; }
-            set {_ErrorMessageOk = value;RaisePropertyChanged(nameof(ErrorMessageOk));
+            set
+            {
+                _ErrorMessageOk = value; RaisePropertyChanged(nameof(ErrorMessageOk));
             }
         }
 
 
         private string _PreNomCreaPersonne;
 
-        public string PreNomCreaPersonne {
+        public string PreNomCreaPersonne
+        {
             get { return _PreNomCreaPersonne; }
             set { _PreNomCreaPersonne = value; RaisePropertyChanged(nameof(PreNomCreaPersonne)); }
         }
 
         private string _NomCreaPersonne;
 
-        public string NomCreaPersonne { get { return _NomCreaPersonne; }
-        set { _NomCreaPersonne = value; RaisePropertyChanged(nameof(NomCreaPersonne)); }
+        public string NomCreaPersonne
+        {
+            get { return _NomCreaPersonne; }
+            set { _NomCreaPersonne = value; RaisePropertyChanged(nameof(NomCreaPersonne)); }
         }
 
         private DateTime _DateNiassPersonne = DateTime.Now;
-        public DateTime DateNiassPersonne 
+        public DateTime DateNiassPersonne
         {
             get { return _DateNiassPersonne; }
             set { _DateNiassPersonne = value; RaisePropertyChanged(nameof(DateNiassPersonne)); }
@@ -445,9 +520,9 @@ namespace Cinebel.ViewModels
         public void AddPersonne()
         {
             if (!string.IsNullOrEmpty(NomCreaPersonne))
-                { 
+            {
                 string newDate = DateNiassPersonne.ToString("dd/MM/yyyy");
-                string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 Connection cnx = new Connection(cs);
                 string sql = "AjoutPersonne";
                 Command cmd = new Command(sql, true);
@@ -461,7 +536,7 @@ namespace Cinebel.ViewModels
                 DateNiassPersonne = DateTime.Now;
                 AllScenariste();
                 AllRealisateur();
-                
+
             }
         }
 
@@ -499,8 +574,8 @@ namespace Cinebel.ViewModels
             }
         }
 
-        private string _IdCreaFilms;
-        public string IdCreaFilms
+        private int _IdCreaFilms;
+        public int IdCreaFilms
         {
             get { return _IdCreaFilms; }
             set
@@ -512,7 +587,7 @@ namespace Cinebel.ViewModels
         public ObservableCollection<film> ListeFilmCrea
         {
             get { return _ListeFilmCrea; }
-            set { _ListeFilmCrea = value; RaisePropertyChanged(nameof(_ListeFilmCrea)); }
+            set { _ListeFilmCrea = value; RaisePropertyChanged(nameof(ListeFilmCrea)); }
 
         }
 
@@ -520,39 +595,85 @@ namespace Cinebel.ViewModels
 
         public RelayCommand CreaList
         {
-            get { return _CreaList ?? (_CreaList = new RelayCommand(SelectAllFilms)); }
+            get { return _CreaList ?? (_CreaList = new RelayCommand(CreationListe)); }
         }
         public void SelectAllFilms()
         {
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "Allfilms";
             Command cmd = new Command(sql, true);
             foreach (film item in cnx.ExecuteReader(cmd, film.ConvertAll))
             {
-                foreach(Genre elt in TousGenre)
+                foreach (Genre elt in TousGenre)
                 {
-                    if(item.Genre == elt.Id)
+                    if (item.Genre == elt.Id)
                     {
                         item.StrGenre = elt.NomGenre;
                     }
                 }
                 ListeFilmCrea.Add(item);
             }
+
         }
         public void CreationListe()
         {
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            Connection cnx = new Connection(cs);
-            string sql = "NewListe";
-            Command cmd = new Command(sql, true);
-            cmd.AddParameter("Id_Utilisateur", User.Nickname);
-            cmd.AddParameter("Id_Film", IdCreaFilms);
-            cmd.AddParameter("NomListe", NomCreaListe);
-            cnx.ExecuteScalar(cmd);
+            if (NomCreaListe != null)
+            {
+
+                string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                Connection cnx = new Connection(cs);
+                string sql = "NewListe";
+                Command cmd = new Command(sql, true);
+                cmd.AddParameter("Id_Utilisateur", User.Id);
+                cmd.AddParameter("NomListe", NomCreaListe);
+                string NomDeListe = (string)cnx.ExecuteScalar(cmd);
+                ListeMemo.Nom = NomCreaListe;
+                ListeView window = new ListeView();
+                window.ShowDialog();
+            }
+            else
+            {
+                if (ListeSelected != null)
+                {
+                    
+                    ListeMemo.Nom = ListeSelected.NomListe;
+                    ListeView window = new ListeView();
+                    window.ShowDialog();
+                }
+            }
+            
+               
+
         }
+        private ObservableCollection<ModelListe> _ListeToutes;
+        public ObservableCollection<ModelListe> ListeToutes
+        {
+            get { return _ListeToutes; }
+            set { _ListeToutes = value; RaisePropertyChanged(nameof(ListeToutes));}
 
-
+        }
+        private ModelListe _ListeSelected;
+        public ModelListe ListeSelected
+        {
+            get { return _ListeSelected; }
+            set
+            {
+                _ListeSelected = value; RaisePropertyChanged(nameof(ListeSelected));
+            }
+        }
+        public void AllListe()
+        {
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            Connection cnx = new Connection(cs);
+            string sql = "AllListe";
+            Command cmd = new Command(sql, true);
+            cmd.AddParameter("Id_Utilisateur", User.Id);
+            foreach (ModelListe item in cnx.ExecuteReader(cmd, ModelListe.Converter))
+            {
+                ListeToutes.Add(item);
+            };
+        }
 
     }
 }

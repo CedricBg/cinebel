@@ -1,0 +1,30 @@
+﻿<Window x:Class="Cinebel.ListeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinebel"
+        mc:Ignorable="d"
+        Title="ListeView" Height="450" Width="800" ResizeMode="NoResize" DataContext="{StaticResource Listee}">
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/Cine.jpg" Stretch="Fill" />
+    </Window.Background>
+    <Grid>
+        
+        <Label  Content="Sélectionnez un film à ajouter à la liste dans la liste"  VerticalAlignment="Top" RenderTransformOrigin="0.289,0.502" Height="32" Margin="728,33,85,0"/>
+        
+        <ListView SelectionMode="Single"   ItemsSource="{Binding TousGenre}" SelectedItem="{Binding filmSelecter, Mode=TwoWay}" RenderTransformOrigin="0.5,0.5" Margin="425,70,72,102" >
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nr°" Width="30" DisplayMemberBinding="{Binding Id}" ></GridViewColumn>
+                    <GridViewColumn Header="Titre" Width="100" DisplayMemberBinding="{Binding Titre }"></GridViewColumn>
+                    <GridViewColumn Header="Genre" Width="100" DisplayMemberBinding="{Binding StrGenre }"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Ajouter un film à la liste" Command="{Binding AddFilm}" HorizontalAlignment="Center" Margin="0,381,0,0" VerticalAlignment="Top" Width="252" />
+        
+
+    </Grid>
+</Window>

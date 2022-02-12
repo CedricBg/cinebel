@@ -67,7 +67,7 @@ namespace Cinebel.ViewModels
         private string CheckUser()
         {
             string UserChecked = null;
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "CheckUser";
             Command cmd = new Command(sql, true);
@@ -81,13 +81,13 @@ namespace Cinebel.ViewModels
             string UserChecked = CheckUser();
             if (!string.IsNullOrEmpty(NickName) && !string.IsNullOrEmpty(Password))
             {
-                string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 Connection cnx = new Connection(cs);
                 string sql = "UserRegister";
                 Command cmd = new Command(sql, true);
                 cmd.AddParameter("NickName", NickName);
                 cmd.AddParameter("Password", Password);
-                cnx.ExecuteNonQuery(cmd);
+                User.Id =  cnx.ExecuteNonQuery(cmd);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Cinebel.ViewModels
         public void AllGenre()
         {
 
-            string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             Connection cnx = new Connection(cs);
             string sql = "RecupToutLesGenre";
 
@@ -120,7 +120,7 @@ namespace Cinebel.ViewModels
             if (!string.IsNullOrEmpty(NickName) && !string.IsNullOrEmpty(Password))
             {
                 ErrorMessage = null;
-                string cs = @"Data Source=DESKTOP-05K31B6\VE_SERVER;Initial Catalog=Cinebel;User ID=kirk;Password=2163945Aa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string cs = @"Data Source=DESKTOP-CEUURF0\MSSQLSERVER2;Initial Catalog=Cinebel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 Connection cnx = new Connection(cs);
                 string sql = "UserLogin";
                 Command cmd = new Command(sql, true);
@@ -151,7 +151,6 @@ namespace Cinebel.ViewModels
             
         }
 
-        
 
 
         private RelayCommand _ChangeButton;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hezMOk0mHyBzwSvp1VO56CAsRtHwfps+CyPGZpbvHlab+OmwdE2RhZZBSi90GMbkPmT9fUbdCVrDMUzeAYtCLw==",
+  "dgSpecHash": "y03aFvP+8TZab/vuKl6KWW0YNx2lDlyZA6mLThL2nJ5gcMQ+mgOpmmjw7lsc9gKtRWhIkCeZJ1U7kW4EleQa+A==",
   "success": true,
-  "projectFilePath": "H:\\jonathan\\Cinebel\\cinebel\\Cinebel\\Cinebel.csproj",
+  "projectFilePath": "C:\\Users\\cedri\\Desktop\\jonathan\\Cibnebel avant productions\\Cinebel\\cinebel\\Cinebel\\Cinebel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cedri\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\cedri\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

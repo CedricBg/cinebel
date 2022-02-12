@@ -9,6 +9,6 @@ namespace Cinebel.Models
     public static class User
     {
         public static string Nickname { get; set; }
-        public static int Id { get; set; }
+        public static int Id { get; set;}
     }
 }

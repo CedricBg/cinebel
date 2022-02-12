@@ -10,12 +10,18 @@
     <Compile Update="Acteurs.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ListeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Window1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Acteurs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ListeView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
